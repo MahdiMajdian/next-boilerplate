@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { GetStaticPropsContext, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
@@ -70,3 +70,12 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+export async function getStaticProps({locale}: GetStaticPropsContext) {
+
+  return {
+    props: {
+      messages: (await import(`../languages/${locale}.json`)).default,
+    }
+	};
+};
