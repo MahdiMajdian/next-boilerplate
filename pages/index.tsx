@@ -1,9 +1,14 @@
-import type { GetStaticPropsContext, NextPage } from 'next'
+import { ReactElement } from 'react'
+import type { GetStaticPropsContext } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 
-const Home: NextPage = () => {
+import { NextPageWithLayout } from 'app/constants/types'
+import styles from '../styles/Home.module.css'
+import { Layout, LayoutAuth } from '@/components/Layout'
+
+
+const Home: NextPageWithLayout = () => {
   return (
     <div className={styles.container}>
       <Head>
@@ -66,6 +71,16 @@ const Home: NextPage = () => {
         </a>
       </footer>
     </div>
+  )
+}
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Layout>
+      <LayoutAuth>
+        {page}
+      </LayoutAuth>
+    </Layout>
   )
 }
 
